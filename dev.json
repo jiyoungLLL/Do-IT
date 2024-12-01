@@ -1,0 +1,109 @@
+{
+  "profile": {
+    "project": [
+      {
+        "project": "이약뭐약",
+        "duration": "24.07 ~ 2024.08 (2개월)",
+        "member": "6명 (프론트 및 기획 3명, 백엔드 및 AI 3명",
+        "responsible": "메인페이지/캘린더/챗봇 기능 설계 및 구현, 기획 및 웹 디자인",
+        "dev-stack": ["TypeScript", "React.js", "Vite", "Zustand"],
+        "dev-work": [
+          "ChatGPT-4 기반 챗봇 페이지 구현",
+          "Zustand를 통한 약 복용 여부,  혈당 및 증상 사진 등 사용자 정보 전역 관리",
+          "react-helmet-async를 활용한 페이지별 메타 데이터 동적 설정 구현",
+          "OAuth 2.0 기반 카카오, 네이버, 구글 소셜 로그인 기능 구현"
+        ],
+        "link": "https://github.com/jiyoungLLL/eyakmoyak"
+      }
+    ],
+    "dev-stack-icon": [
+      {
+        "name": "JavaScript",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHf8McRaUXvoH0V0CiFPS-XRG_ZOaKYt8NVw&s"
+      },
+      {
+        "name": "TypeScript",
+        "image": "https://images.velog.io/images/mokyoungg/post/6659a8e8-5234-49e5-b3da-a3816c08bfdc/%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%20%EB%A1%9C%EA%B3%A0.svg"
+      },
+      {
+        "name": "React.js",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg1MndL-Xp1JcnqaB0YOqTp6zDjrwYyGKsPA&s"
+      },
+      {
+        "name": "Vue.js",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png"
+      },
+      {
+        "name": "Next.js",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdyUZuFfpmQ7Ymts56nR9J0AvUCiffRpC9jw&s"
+      },
+      {
+        "name": "Vite",
+        "image": "https://ko.vite.dev/logo.svg"
+      },
+      {
+        "name": "Redux",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD4BIxKgyQ65b_hc75kSVUPmmMTPUo1DidYA&s"
+      },
+      {
+        "name": "Zustand",
+        "image": "https://velog.velcdn.com/images/sangje112/post/54eb73ca-985a-42ee-aba0-e1439edd466e/image.png"
+      },
+      {
+        "name": "Vercel",
+        "image": "https://w7.pngwing.com/pngs/436/888/png-transparent-vercel-hd-logo-thumbnail.png"
+      },
+      {
+        "name": "Webpack",
+        "image": "https://d2ooyrflu7lhqd.cloudfront.net/webpack_263acedd0c.png"
+      },
+      {
+        "name": "Babel",
+        "image": "https://images.velog.io/images/jiheon/post/ca7102e7-f832-4102-8941-0af7591404ec/12.png"
+      },
+      {
+        "name": "HTML5",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEc9A_S6BPxCDRp5WjMFEfXrpCu1ya2OO-Lw&s"
+      },
+      {
+        "name": "CSS3",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/800px-CSS3_logo_and_wordmark.svg.png"
+      },
+      {
+        "name": "GitHub",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbqj9Ii13d6hx5a9kyLnC5A8A96LDSaSZv_w&s"
+      }
+    ]
+  },
+  "todo": {
+    "2024-11-28": [
+      {
+        "name": "웹프로그래밍 기말 과제 기획안 작성",
+        "time": "16:00",
+        "checked": true
+      },
+      {
+        "name": "웹프로그래밍 기말 공부",
+        "time": "14:00",
+        "checked": false
+      },
+      {
+        "name": "강아지 산책",
+        "time": "18:00",
+        "checked": true
+      }
+    ],
+    "2024-12-01": [
+      {
+        "name": "컴퓨터 네트워크 기말 공부",
+        "time": "12:00",
+        "checked": true
+      },
+      {
+        "name": "ㅇㅇ랑 더현대",
+        "time": "15:00",
+        "checked": true
+      }
+    ]
+  }
+}

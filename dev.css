@@ -1,0 +1,166 @@
+@font-face {
+  font-family: 'Pretendard-Regular';
+  src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+body {
+  font-family: 'Pretendard-Regular';
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+}
+#side-bar {
+  width: 230px;
+  height: 100vh;
+  background-color: #b5c5ab;
+  padding: 40px 30px;
+  box-shadow: 0 8px 8px #8d8d8d;
+  border-top-right-radius: 10px;
+}
+.profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile > div {
+  display: flex;
+  align-items: center;
+}
+.profile > div > img:first-of-type {
+  width: 45px;
+  border-radius: 50%;
+}
+.profile > div > div {
+  margin-left: 20px;
+  font-size: 26px;
+  font-weight: 800;
+}
+.profile > img:last-of-type {
+  width: 30px;
+}
+.profile > img:last-of-type:hover {
+  cursor: pointer;
+}
+.category {
+  margin-top: 80px;
+  font-size: 20px;
+}
+.category > div > a {
+  padding: 15px 0;
+  display: flex;
+  align-items: center;
+}
+.category > div:first-of-type {
+  border-bottom: 0.5px #000000 solid;
+  border-top: 0.5px #000000 solid;
+}
+.category > div:hover {
+  cursor: pointer;
+}
+.category > div > a > div {
+  margin-left: 10px;
+}
+a {
+  text-decoration: none;
+  color: #6f6f6f;
+}
+/* 이력서 content */
+#content {
+  padding: 20px 60px;
+  width: 70%;
+}
+#projects {
+  max-height: 77vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 20px 0;
+}
+.title {
+  font-size: 30px;
+  border-bottom: 0.5px solid #969696;
+  padding: 20px;
+}
+#name {
+  font-size: 45px;
+  font-weight: 800;
+}
+#add-project {
+  display: flex;
+  justify-content: flex-end;
+}
+#add-project > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  width: 110px;
+  padding: 5px;
+  font-size: 17px;
+  border: 2px dotted #456e2a;
+  border-radius: 10px;
+}
+#add-project > img {
+  margin-right: 8px;
+}
+#add-project:hover {
+  cursor: pointer;
+}
+.new-project {
+  border: 0.5px solid darkgray;
+  border-radius: 10px;
+  margin: auto;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+.project-name {
+  border: none;
+  height: 40px;
+  width: 70%;
+  font-size: 30px;
+  outline: none;
+  margin: 10px;
+  font-weight: 800;
+}
+.project-name::placeholder {
+  font-weight: 600;
+}
+.content {
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+}
+.content > input {
+  width: 80%;
+  outline: none;
+  border: none;
+  height: 20px;
+  font-size: 18px;
+}
+.content > input::placeholder {
+  font-size: 18px;
+  font-weight: 300;
+}
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.edit-btn {
+  font-size: 15px;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+.edit-btn:hover {
+  cursor: pointer;
+}
+.edit-btn:first-of-type {
+  border: #f73e3f 1px solid;
+  color: #f73e3f;
+  background-color: #ffffff;
+  margin-right: 15px;
+}
+.edit-btn:last-of-type {
+  border: none;
+  background-color: #b5c5ab;
+}
