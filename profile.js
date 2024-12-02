@@ -6,7 +6,8 @@ if (location == 'http://127.0.0.1:5500/profile.html') {
 }
 
 const content = document.getElementById('projects');
-const addButton = document.getElementById('add-project');
+const addButton = document.querySelector('.add-button');
+const stack = []; // 스택 초기화
 
 // 공통 요소 생성
 const createElement = (tagName, attributes = {}, text = '') => {
@@ -25,10 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const isEmpty = createElement(
       'div',
       { className: 'isEmpty' },
-      '프로젝트가 없습니다. 새 프로젝트를 작성해보세요!'
+      '🗑️ 이력서가 비어있습니다. 새 프로젝트를 작성해보세요!'
     );
     content.appendChild(isEmpty);
   }
+
+  // 기술 스택 fetch
+  fetch('dev.json')
+    .then((res) => res.json())
+    .then((result) => {
+      stack.push(...result.profile.stackIcon);
+    });
 });
 
 // 기존 데이터 가져오기
@@ -65,10 +73,60 @@ const renderProject = (project) => {
       type: 'text',
       placeholder: `${label} 을/를 입력해주세요`,
       value: project[key] || '',
+      className: key,
     });
-    input.addEventListener('change', (e) => (project[key] = e.target.value));
+
+    input.addEventListener('change', (e) => {
+      project[key] = e.target.value;
+      updatedSelectedStack(key, e.target.value);
+      input.value = '';
+    });
     detail.appendChild(input);
     newProject.appendChild(detail);
+
+    // datalist 추가
+    if (label == '기술 스택') {
+      input.setAttribute('list', key);
+      const datalist = createElement('datalist', { id: key }, '');
+      stack.map((stack) => {
+        const option = createElement('option', {
+          value: stack.name,
+        });
+        datalist.appendChild(option);
+      });
+      input.after(datalist);
+    }
+
+    // 기술 스택 추가
+    const newStackContainer = createElement(
+      'div',
+      { className: 'stack-container' },
+      ''
+    );
+    const updatedSelectedStack = (key, value) => {
+      const stackContainer = document.querySelector(`.${key}`);
+      stack.map((stack) => {
+        if (value == stack.name) {
+          const deleteStack = createElement('img', {src: })
+          const newStack = createElement(
+            'div',
+            {
+              key: key,
+              className: 'stack-icon',
+            },
+            value
+          );
+          const stackImg = createElement('img', {
+            src: stack.image,
+            alt: `${stack.name} 아이콘`,
+          });
+          newStack.appendChild(stackImg);
+          newStackContainer.appendChild(newStack);
+        }
+      });
+
+      stackContainer?.after(newStackContainer);
+    };
   });
 
   // 담당 개발 업무
@@ -134,4 +192,10 @@ const renderProject = (project) => {
 projectArr.forEach((project) => renderProject(project));
 
 // 새 프로젝트
-addButton.addEventListener('click', () => renderProject({}));
+const createProject = () => {
+  addButton.addEventListener('click', () => {
+    document.getElementsByClassName('isEmpty')[0]?.remove();
+    renderProject({});
+  });
+};
+createProject();
