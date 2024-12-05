@@ -10,14 +10,15 @@ body {
   margin: 0;
   overflow: hidden;
   display: flex;
+  width: 100vw;
 }
 #side-bar {
-  width: 230px;
+  flex: 1;
   height: 100vh;
   background-color: #b5c5ab;
   padding: 40px 30px;
   box-shadow: 0 8px 8px #8d8d8d;
-  border-top-right-radius: 10px;
+  border-top-right-radius: 5px;
 }
 .profile {
   display: flex;
@@ -69,7 +70,7 @@ a {
 /* 이력서 content */
 #content {
   padding: 20px 60px;
-  width: 70%;
+  flex: 4;
 }
 #projects {
   max-height: 77vh;
@@ -117,7 +118,7 @@ a {
 .project-name {
   border: none;
   height: 40px;
-  width: 70%;
+  width: 100%;
   font-size: 30px;
   outline: none;
   margin: 10px;
@@ -177,7 +178,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 5px 0 0;
+  margin: 10px 10px 0 0;
   padding: 5px;
   border: none;
   border-radius: 10px;
@@ -185,7 +186,59 @@ a {
   box-shadow: 1px 3px 3px #b5c5ab;
   font-size: 16px;
 }
-.stack-icon > img {
+.stack-icon > img:first-of-type {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+.stack-icon > img:last-of-type {
   width: 20px;
   margin-left: 5px;
+}
+.stack-icon > img:last-of-type:hover {
+  cursor: pointer;
+}
+
+/* todo.html */
+#todo-content {
+  padding: 20px 130px 0 70px;
+  margin-top: 20px;
+  flex: 3.7;
+}
+.todo-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+.todayTodoNum {
+  color: #d78179;
+  font-size: 18px;
+  font-weight: lighter;
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 0.5px solid rgb(108, 108, 108);
+}
+.todayTodoNum > img {
+  width: 25px;
+  margin-right: 10px;
+}
+.todolist {
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 0.5px solid rgb(108, 108, 108);
+}
+.todolist > img {
+  width: 30px;
+  margin: 0 20px;
+}
+.todolist:hover {
+  cursor: pointer;
+}
+.checked {
+  color: #b7b6b6;
 }

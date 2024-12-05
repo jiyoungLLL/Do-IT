@@ -9,7 +9,7 @@ const content = document.getElementById('projects');
 const addButton = document.querySelector('.add-button');
 const stack = []; // 스택 초기화
 
-// 공통 요소 생성
+// 공통 요소 생성 함수
 const createElement = (tagName, attributes = {}, text = '') => {
   const element = document.createElement(tagName);
   Object.entries(attributes).forEach(([key, value]) => {
@@ -19,7 +19,7 @@ const createElement = (tagName, attributes = {}, text = '') => {
   return element;
 };
 
-// 데이터 없을 때 프로젝트가 없습니다
+// 렌더링
 document.addEventListener('DOMContentLoaded', () => {
   const projectExist = content.children;
   if (projectExist.length == 0) {
@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((result) => {
       stack.push(...result.profile.stackIcon);
     });
+  z;
 });
 
 // 기존 데이터 가져오기
@@ -56,7 +57,14 @@ const renderProject = (project) => {
     placeholder: '프로젝트 명',
     value: project.name || '',
   });
-  nameInput.addEventListener('change', (e) => (project.name = e.target.value));
+  nameInput.addEventListener('change', (e) => {
+    project.name = e.target.value || undefined;
+    if (projectArr.find((p) => p.name == e.target.value)) {
+      alert('이미 존재하는 프로젝트입니다. 다른 프로젝트명을 입력해주세요 ‼️');
+      nameInput.value = '';
+      nameInput.focus();
+    }
+  });
   newProject.appendChild(nameInput);
 
   // 단답 내용
@@ -72,15 +80,10 @@ const renderProject = (project) => {
     const input = createElement('input', {
       type: 'text',
       placeholder: `${label} 을/를 입력해주세요`,
-      value: project[key] || '',
+      value: key == 'stack' ? '' : project[key] || '',
       className: key,
     });
 
-    input.addEventListener('change', (e) => {
-      project[key] = e.target.value;
-      updatedSelectedStack(key, e.target.value);
-      input.value = '';
-    });
     detail.appendChild(input);
     newProject.appendChild(detail);
 
@@ -95,6 +98,12 @@ const renderProject = (project) => {
         datalist.appendChild(option);
       });
       input.after(datalist);
+
+      input.addEventListener('change', (e) => {
+        project[key] = e.target.value;
+        updatedSelectedStack(key, e.target.value);
+        input.value = '';
+      });
     }
 
     // 기술 스택 추가
@@ -103,11 +112,16 @@ const renderProject = (project) => {
       { className: 'stack-container' },
       ''
     );
+    let stackArr = project.stack || [];
+
     const updatedSelectedStack = (key, value) => {
       const stackContainer = document.querySelector(`.${key}`);
       stack.map((stack) => {
         if (value == stack.name) {
-          const deleteStack = createElement('img', {src: })
+          const deleteStack = createElement('img', {
+            src: 'https://github.com/user-attachments/assets/b702dad0-19f8-498e-904b-949cf58e1220',
+            alt: `${stack.name} 삭제 버튼`,
+          });
           const newStack = createElement(
             'div',
             {
@@ -120,13 +134,30 @@ const renderProject = (project) => {
             src: stack.image,
             alt: `${stack.name} 아이콘`,
           });
-          newStack.appendChild(stackImg);
+          project[key] = stackArr;
+          stackArr.push(value);
+
+          newStack.prepend(stackImg);
+          newStack.appendChild(deleteStack);
           newStackContainer.appendChild(newStack);
+
+          // 스택 삭제 버튼 이벤트
+          deleteStack.addEventListener('click', () => {
+            newStack.remove();
+            const updatedStackArr = stackArr.filter((stack) => stack != value);
+            stackArr = [];
+            stackArr.push(...updatedStackArr);
+            project[key] = stackArr;
+          });
         }
       });
-
       stackContainer?.after(newStackContainer);
     };
+
+    // 기존 기술 스택 보이기
+    stackArr?.map((preStack) => {
+      updatedSelectedStack(key, preStack);
+    });
   });
 
   // 담당 개발 업무
@@ -156,9 +187,13 @@ const renderProject = (project) => {
   const saveButton = createElement('button', {}, '저장');
   saveButton.className = 'edit-btn';
   saveButton.addEventListener('click', () => {
-    if (!projectArr.includes(project)) projectArr.push(project);
-    localStorage.setItem('project', JSON.stringify(projectArr));
-    alert('✅ 프로젝트가 저장되었습니다!');
+    if (!project.name || project.name === undefined) {
+      alert('🚨 프로젝트명은 필수값입니다.');
+    } else {
+      if (!projectArr.includes(project)) projectArr.push(project);
+      localStorage.setItem('project', JSON.stringify(projectArr));
+      alert('✅ 프로젝트가 저장되었습니다!');
+    }
   });
 
   const deleteButton = createElement(
@@ -175,7 +210,7 @@ const renderProject = (project) => {
 
   deleteButton.addEventListener('click', () => {
     const isDelete = confirm(
-      '⚠️ 정말 삭제하시겠습니까? 프로젝트 전체 내용이 삭제됩니다. ⚠️'
+      `⚠️ 정말 삭제하시겠습니까? 프로젝트명 "${project.name}"의 전체 내용이 삭제됩니다. ⚠️`
     );
     if (isDelete) {
       document.getElementById(project.name)?.remove();
