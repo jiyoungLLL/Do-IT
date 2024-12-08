@@ -9,21 +9,6 @@ const todaylist = []; // 오늘
 let todaySum = 0;
 const prelist = []; // 이전
 let preSum = 0;
-fetch('dev.json')
-  .then((res) => res.json())
-  .then((result) => {
-    Object.entries(result.todo).forEach(([key, value]) => {
-      if (key == today) {
-        todaylist.push(...value);
-        todaySum++;
-      } else {
-        prelist.push({ key: value });
-        preSum++;
-      }
-    });
-    localStorage.setItem('todo', JSON.stringify(todaylist));
-    renderTodo(todaylist);
-  });
 
 // 오늘 날짜
 const time = new Date();
@@ -53,28 +38,30 @@ const createElement = (tagName, attributes = {}, text = '') => {
 const container = document.querySelector('#todo-content');
 
 // 상단
-const top = createElement('div', { className: 'todo-top' }, '');
-const todayStr = createElement('div', {}, '오늘');
-const todayNum = createElement(
-  'div',
-  { className: 'todayNum' },
-  today + ` ${day}`
-);
-top.appendChild(todayStr);
-top.appendChild(todayNum);
-container.appendChild(top);
-// 오늘 몇 개
-const todayTodoNum = createElement(
-  'div',
-  { className: 'todayTodoNum' },
-  `${todaySum}개의 일정이 있습니다.`
-);
-const hamburger = createElement('img', {
-  src: 'https://icon-library.com/images/menu-icon-mobile/menu-icon-mobile-22.jpg',
-  alt: '햄버거 아이콘',
-});
-todayTodoNum.prepend(hamburger);
-top.after(todayTodoNum);
+const renderTop = () => {
+  const top = createElement('div', { className: 'todo-top' }, '');
+  const todayStr = createElement('div', {}, '오늘');
+  const todayNum = createElement(
+    'div',
+    { className: 'todayNum' },
+    today + ` ${day}`
+  );
+  top.appendChild(todayStr);
+  top.appendChild(todayNum);
+  container.appendChild(top);
+  // 오늘 몇 개
+  const todayTodoNum = createElement(
+    'div',
+    { className: 'todayTodoNum' },
+    `${todaySum}개의 일정이 있습니다.`
+  );
+  const hamburger = createElement('img', {
+    src: 'https://icon-library.com/images/menu-icon-mobile/menu-icon-mobile-22.jpg',
+    alt: '햄버거 아이콘',
+  });
+  todayTodoNum.prepend(hamburger);
+  top.after(todayTodoNum);
+};
 
 // 하단
 const renderTodo = (listArr) => {
@@ -84,17 +71,26 @@ const renderTodo = (listArr) => {
     const todayTodo = createElement(
       'div',
       { className: `todolist ${list.checked ? 'checked' : ''}` },
-      list.name
+      ''
     );
-
+    const scheduleContainer = createElement('div', {}, '');
+    const schedule = createElement('div', {}, list.name);
     const isCheck = createElement('img', {
       src: list.checked ? './img/checked.png' : './img/checkbox.png',
       alt: '체크 이미지',
     });
-    todayTodo.prepend(isCheck);
+    scheduleContainer.appendChild(isCheck);
+    scheduleContainer.appendChild(schedule);
+
+    const deleteContainer = createElement('div', {}, '');
+    const isdelete = createElement('button', {}, '삭제');
+    deleteContainer.appendChild(isdelete);
+
+    todayTodo.appendChild(scheduleContainer);
+    todayTodo.appendChild(deleteContainer);
     container.appendChild(todayTodo);
 
-    todayTodo.addEventListener('click', () => {
+    scheduleContainer.addEventListener('click', () => {
       newList[index].checked = !newList[index].checked;
       todayTodo.classList.toggle('checked', newList[index].checked);
       isCheck.src = newList[index].checked
@@ -102,7 +98,55 @@ const renderTodo = (listArr) => {
         : './img/checkbox.png';
 
       localStorage.setItem('todo', JSON.stringify(newList));
-      console.log(newList);
+    });
+
+    isdelete.addEventListener('click', () => {
+      const deletedList = newList.filter((todo) => todo.name !== list.name);
+      localStorage.setItem('todo', JSON.stringify(deletedList));
+      todayTodo.remove();
+
+      if (JSON.parse(localStorage.getItem('todo')) == []) {
+        localStorage.setItem('todo', 'empty');
+      }
     });
   });
 };
+
+const todoEmpty = () => {
+  const emptyTodo = createElement(
+    'div',
+    { className: 'emptyTodo' },
+    '오늘 일정이 비어있습니다👀 일정을 추가해주세요!📝'
+  );
+  container.appendChild(emptyTodo);
+};
+
+const data = JSON.parse(localStorage.getItem('todo')) || [];
+fetch('dev.json')
+  .then((res) => res.json())
+  .then((result) => {
+    const isTodayResult = result.todo[today];
+    if (!isTodayResult) {
+      localStorage.removeItem('todo');
+      renderTop();
+      todoEmpty();
+    } else if (isTodayResult != JSON.stringify(data) && data.length != 0) {
+      todaySum = data.length;
+      renderTop();
+      renderTodo(data);
+    } else {
+      Object.entries(result.todo).forEach(([key, value]) => {
+        if (key == today) {
+          todaylist.push(...value);
+          todaySum = value.length;
+        } else {
+          prelist.push(...value);
+          preSum = value.length;
+        }
+      });
+
+      localStorage.setItem('todo', JSON.stringify(todaylist));
+      renderTop();
+      renderTodo(todaylist);
+    }
+  });

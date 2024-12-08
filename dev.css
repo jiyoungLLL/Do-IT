@@ -169,7 +169,7 @@ a {
   font-size: large;
   text-align: center;
   margin: 30px;
-  color: #456e2a;
+  /* color: #456e2a; */
 }
 .stack-container {
   display: flex;
@@ -229,12 +229,26 @@ a {
   font-size: 17px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 15px 0;
   border-bottom: 0.5px solid rgb(108, 108, 108);
 }
-.todolist > img {
+.todolist > div:first-of-type {
+  display: flex;
+  align-items: center;
+}
+.todolist img {
   width: 30px;
   margin: 0 20px;
+}
+.todolist button {
+  margin: 0 15px;
+  border-radius: 10px;
+  border: 0.8px solid #f73e3f;
+  padding: 10px 15px;
+  background-color: #ffffff;
+  font-weight: 600;
+  color: #f73e3f;
 }
 .todolist:hover {
   cursor: pointer;

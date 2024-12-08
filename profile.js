@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     .then((result) => {
       stack.push(...result.profile.stackIcon);
     });
-  z;
 });
 
 // 기존 데이터 가져오기
@@ -189,6 +188,7 @@ const renderProject = (project) => {
   saveButton.addEventListener('click', () => {
     if (!project.name || project.name === undefined) {
       alert('🚨 프로젝트명은 필수값입니다.');
+      nameInput.focus();
     } else {
       if (!projectArr.includes(project)) projectArr.push(project);
       localStorage.setItem('project', JSON.stringify(projectArr));
