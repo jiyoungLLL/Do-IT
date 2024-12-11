@@ -200,10 +200,10 @@ a {
 }
 
 /* todo.html */
-#todo-content {
+.content-container {
+  flex: 3.7;
   padding: 20px 130px 0 70px;
   margin-top: 20px;
-  flex: 3.7;
 }
 .todo-top {
   display: flex;
@@ -219,7 +219,7 @@ a {
   display: flex;
   align-items: center;
   padding-bottom: 20px;
-  border-bottom: 0.5px solid rgb(108, 108, 108);
+  border-bottom: 0.5px solid rgb(192, 192, 192);
 }
 .todayTodoNum > img {
   width: 25px;
@@ -231,7 +231,7 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 15px 0;
-  border-bottom: 0.5px solid rgb(108, 108, 108);
+  border-bottom: 0.5px solid rgb(192, 192, 192);
 }
 .todolist > div:first-of-type {
   display: flex;
@@ -253,6 +253,33 @@ a {
 .todolist:hover {
   cursor: pointer;
 }
-.checked {
+.checked input {
   color: #b7b6b6;
+}
+.add-todo {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px;
+}
+.add-todo img {
+  width: 20px;
+  margin-right: 10px;
+}
+.add-todo:hover {
+  cursor: pointer;
+  color: #d78179;
+}
+.emptyTodo {
+  border-bottom: 0.5px solid rgb(192, 192, 192);
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  color: gray;
+}
+.schedule {
+  border: none;
+  font-size: 18px;
+  outline: none;
 }
