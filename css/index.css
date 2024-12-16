@@ -95,11 +95,11 @@ input::placeholder {
   flex-direction: column;
   padding: 2px;
 }
-.join-input > div:first-of-type {
+.join-input > form:first-of-type {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.join-input > div:last-of-type {
+.join-input > form:last-of-type {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }

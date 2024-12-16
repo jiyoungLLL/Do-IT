@@ -8,14 +8,15 @@ const createElement = (tagName, attributes = {}, text = '') => {
 };
 
 const joinContainer = document.querySelector('.join-input');
+const joinButton = document.getElementById('join');
 
 const inputIndex = ['이메일', '비밀번호', '비밀번호 확인', '닉네임'];
-
-let joinOK = false;
+let joinOK = true;
+const info = {};
 
 // input field 생성
 inputIndex.forEach((input) => {
-  const container = createElement('div', { className: 'input' }, '');
+  const container = createElement('form', { className: 'input' }, '');
 
   let imgSrc = '';
   let inputType;
@@ -62,16 +63,48 @@ inputIndex.forEach((input) => {
   newArr.forEach((arr) => container.appendChild(arr));
 
   joinContainer.appendChild(container);
+
+  inputField.addEventListener('change', (e) => {
+    info[input] = e.target.value;
+  });
+
+  deleteButton.addEventListener('click', () => {
+    inputField.value = '';
+  });
 });
 
 const confirmPassword = () => {
-  const passwordArr = document.querySelectorAll('.password');
-  console.log(passwordArr[0].innerText);
-  if (passwordArr[0] === passwordArr[1]) {
-    joinOK = true;
-  } else {
+  const passwordArr = document.getElementsByClassName('password');
+  const [pwd, pwdconfirm] = ['비밀번호', '비밀번호 확인'];
+  if (info[pwd] !== info[pwdconfirm]) {
+    joinOK = false;
     alert('입력하신 비밀번호가 일치하지 않습니다.');
+    [...passwordArr].forEach((pwd) => (pwd.value = ''));
+  } else {
+    joinOK = true;
   }
 };
 
-confirmPassword();
+const isEmpty = () => {
+  for (let i = 0; i < 4; i++) {
+    info[inputIndex[i]] == null ? (joinOK = false) : (joinOK = true);
+  }
+};
+
+joinButton.addEventListener('click', () => {
+  isEmpty();
+  if (joinOK) {
+    confirmPassword();
+  } else {
+    alert('모든 정보를 입력해주세요');
+  }
+  if (joinOK) {
+    const infoArr = [];
+    const pre = JSON.parse(localStorage.getItem('info'));
+    infoArr.push(pre);
+    infoArr.push(info);
+    localStorage.setItem('info', JSON.stringify(infoArr));
+    alert('회원가입이 완료되었습니다. 로그인 화면으로 이동합니다');
+    window.location.replace('index.html');
+  }
+});

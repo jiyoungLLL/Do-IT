@@ -4,10 +4,6 @@ if (location == 'http://127.0.0.1:5500/profile.html') {
   profile.style.fontWeight = '900';
   profile.style.color = '#000000';
 }
-
-const content = document.getElementById('projects');
-const addButton = document.querySelector('.add-button');
-
 // 공통 요소 생성 함수
 const createElement = (tagName, attributes = {}, text = '') => {
   const element = document.createElement(tagName);
@@ -17,32 +13,58 @@ const createElement = (tagName, attributes = {}, text = '') => {
   if (text) element.textContent = text;
   return element;
 };
+// 로그아웃
+const logoutContainer = document.querySelector('.profile');
+const logout = createElement('div', { id: 'logout' }, '로그아웃');
+logoutContainer.appendChild(logout);
+logout.addEventListener('click', () => {
+  sessionStorage.clear();
+  window.location.replace('index.html');
+});
 
-let projectArr = JSON.parse(localStorage.getItem('project')) || [];
+const content = document.getElementById('projects');
+const addButton = document.querySelector('.add-button');
+
+const isLogin = sessionStorage.getItem('login');
+const local = JSON.parse(localStorage.getItem('project'));
+let projectArr = [];
+local.forEach((pro) => {
+  if (pro.nickName === isLogin) projectArr.push(pro);
+});
+
 let stack = JSON.parse(localStorage.getItem('stack'));
 console.log(stack);
 
+// 이름 보여주기
+document.getElementById('nickname').innerText = isLogin;
+document.getElementById('name').innerText = isLogin;
+
 // 렌더링
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('dev.json')
-    .then((res) => res.json())
-    .then((result) => {
-      localStorage.setItem('stack', JSON.stringify(result.profile.stackIcon));
-    });
+  if (isLogin) {
+    fetch('../dev.json')
+      .then((res) => res.json())
+      .then((result) => {
+        localStorage.setItem('stack', JSON.stringify(result.profile.stackIcon));
+      });
 
-  const projectExist = content.children;
-  if (projectExist.length == 0) {
-    const isEmpty = createElement(
-      'div',
-      { className: 'isEmpty' },
-      '이력서를 작성해보세요 👩‍💻'
-    );
-    content.appendChild(isEmpty);
+    const projectExist = content.children;
+    if (projectExist.length == 0) {
+      const isEmpty = createElement(
+        'div',
+        { className: 'isEmpty' },
+        '이력서를 작성해보세요 👩‍💻'
+      );
+      content.appendChild(isEmpty);
+    }
+  } else {
+    window.location.replace('index.html');
   }
 });
 
 // 페이지 렌더링 함수
 const renderProject = (project) => {
+  project['nickName'] = isLogin;
   const newProject = createElement('div', {
     className: 'new-project',
     id: project.id,
@@ -187,7 +209,7 @@ const renderProject = (project) => {
             }
             stackContainer.after(newStackContainer);
 
-            item.stack.forEach((item) => {
+            item?.stack?.forEach((item) => {
               updatedSelectedStack(key, item);
             });
           }
@@ -226,6 +248,7 @@ const renderProject = (project) => {
       nameInput.focus();
     } else {
       if (!projectArr.includes(project)) projectArr.push(project);
+
       localStorage.setItem('project', JSON.stringify(projectArr));
       alert('✅ 프로젝트가 저장되었습니다!');
     }

@@ -35,6 +35,15 @@ const createElement = (tagName, attributes = {}, text = '') => {
 const container = document.querySelector('#todo-content');
 const addContainer = document.querySelector('#add-todo');
 
+// 로그아웃
+const logoutContainer = document.querySelector('.profile');
+const logout = createElement('div', { id: 'logout' }, '로그아웃');
+logoutContainer.appendChild(logout);
+logout.addEventListener('click', () => {
+  sessionStorage.clear();
+  window.location.replace('index.html');
+});
+
 // 상단
 const renderTop = () => {
   const top = createElement('div', { className: 'todo-top' }, '');
@@ -181,36 +190,43 @@ const todoEmpty = () => {
 
 const data = JSON.parse(localStorage.getItem('todo'));
 document.addEventListener('DOMContentLoaded', () => {
-  if (data === null) {
-    fetch('dev.json')
-      .then((res) => res.json())
-      .then((result) => {
-        const isTodayResult = result.todo[today];
-        if (!isTodayResult) {
-          localStorage.removeItem('todo');
-          renderTop();
-          todoEmpty();
-          addTodoList();
-        } else {
-          Object.entries(result.todo).forEach(([key, value]) => {
-            if (key === today) {
-              todaylist.push(...value);
-              todaySum = value.length;
-            }
-          });
+  const isLogin = sessionStorage.getItem('login');
+  // 이름 보여주기
+  document.getElementById('nickname').innerText = isLogin;
+  if (isLogin) {
+    if (data === null) {
+      fetch('../dev.json')
+        .then((res) => res.json())
+        .then((result) => {
+          const isTodayResult = result.todo[today];
+          if (!isTodayResult) {
+            localStorage.removeItem('todo');
+            renderTop();
+            todoEmpty();
+            addTodoList();
+          } else {
+            Object.entries(result.todo).forEach(([key, value]) => {
+              if (key === today) {
+                todaylist.push(...value);
+                todaySum = value.length;
+              }
+            });
 
-          localStorage.setItem('todo', JSON.stringify(todaylist));
-          renderTodo(todaylist);
-          addTodoList();
-        }
-      });
-  } else if (data.length == 0) {
-    renderTop();
-    addTodoList();
-    todoEmpty();
+            localStorage.setItem('todo', JSON.stringify(todaylist));
+            renderTodo(todaylist);
+            addTodoList();
+          }
+        });
+    } else if (data.length == 0) {
+      renderTop();
+      addTodoList();
+      todoEmpty();
+    } else {
+      todaySum = data.length;
+      renderTodo(data);
+      addTodoList();
+    }
   } else {
-    todaySum = data.length;
-    renderTodo(data);
-    addTodoList();
+    window.location.replace('index.html');
   }
 });

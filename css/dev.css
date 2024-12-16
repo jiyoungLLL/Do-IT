@@ -12,10 +12,16 @@ body {
   display: flex;
   width: 100vw;
 }
+#logout {
+  font-size: 14px;
+}
+#logout:hover {
+  cursor: pointer;
+}
 #side-bar {
   flex: 1;
   height: 100vh;
-  background-color: #b5c5ab;
+  background-color: #d7e489;
   padding: 40px 30px;
   box-shadow: 0 8px 8px #8d8d8d;
   border-top-right-radius: 5px;
@@ -99,7 +105,7 @@ a {
   width: 110px;
   padding: 5px;
   font-size: 17px;
-  border: 2px dotted #456e2a;
+  border: 2px dotted #f69a8e;
   border-radius: 10px;
 }
 #add-project > img {
@@ -163,7 +169,7 @@ a {
 }
 .edit-btn:last-of-type {
   border: none;
-  background-color: #b5c5ab;
+  background-color: #d7e489;
 }
 .isEmpty {
   font-size: 18px;
@@ -184,7 +190,7 @@ a {
   border: none;
   border-radius: 10px;
   background-color: #f9f7e6;
-  box-shadow: 1px 3px 3px #b5c5ab;
+  box-shadow: 1px 3px 3px #d7e489;
   font-size: 16px;
 }
 .stack-icon > img:first-of-type {
