@@ -70,7 +70,7 @@ a {
 /* 이력서 content */
 #content {
   padding: 20px 60px;
-  flex: 4;
+  flex: 3.8;
 }
 #projects {
   max-height: 77vh;
@@ -118,7 +118,7 @@ a {
 .project-name {
   border: none;
   height: 40px;
-  width: 100%;
+  width: 70%;
   font-size: 30px;
   outline: none;
   margin: 10px;
@@ -140,7 +140,7 @@ a {
   font-size: 18px;
 }
 .content > input::placeholder {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 300;
 }
 .btn-container {
@@ -166,13 +166,14 @@ a {
   background-color: #b5c5ab;
 }
 .isEmpty {
-  font-size: large;
+  font-size: 18px;
   text-align: center;
   margin: 30px;
-  /* color: #456e2a; */
+  color: gray;
 }
 .stack-container {
   display: flex;
+  flex-wrap: wrap;
 }
 .stack-icon {
   display: flex;
@@ -198,10 +199,20 @@ a {
 .stack-icon > img:last-of-type:hover {
   cursor: pointer;
 }
-
+textarea {
+  width: 90%;
+  height: 80px;
+  outline-color: #456e2a;
+  margin-top: 10px;
+  font-size: 15px;
+}
+textarea::placeholder {
+  font-size: 16px;
+  font-weight: 300;
+}
 /* todo.html */
 .content-container {
-  flex: 3.7;
+  flex: 3.5;
   padding: 20px 130px 0 70px;
   margin-top: 20px;
 }
@@ -275,11 +286,15 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 18px;
   color: gray;
 }
 .schedule {
+  width: 30vw;
   border: none;
   font-size: 18px;
   outline: none;
+}
+.schedule::placeholder {
+  font-size: 17px;
 }

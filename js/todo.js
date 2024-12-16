@@ -4,7 +4,7 @@ if (location == 'http://127.0.0.1:5500/todo.html') {
   todo.style.fontWeight = '900';
   todo.style.color = '#000000';
 }
-// 기존 데이터
+// 데이터 개수 초기화
 let todaySum = 0;
 
 // 오늘 날짜
@@ -83,7 +83,11 @@ const renderTodo = () => {
     });
     const schedule = createElement(
       'input',
-      { value: list.name, className: 'schedule' },
+      {
+        value: list.name,
+        className: 'schedule',
+        placeholder: '할 일을 작성해주세요',
+      },
       ''
     );
     scheduleContainer.appendChild(isCheck);
@@ -167,7 +171,7 @@ const todoEmpty = () => {
     const emptyTodo = createElement(
       'div',
       { className: 'emptyTodo' },
-      '오늘의 일정이 비어있습니다 👀 일정을 추가해주세요! 📝'
+      '오늘의 일정이 비어있습니다 👀  '
     );
     container.appendChild(emptyTodo);
   } else {

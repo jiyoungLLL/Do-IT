@@ -1,0 +1,119 @@
+body {
+  margin: 0;
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+  background-color: #d7e489;
+}
+.left-side {
+  flex: 1;
+  margin-left: 4%;
+}
+.left-side img {
+  height: 100%;
+  object-fit: contain;
+}
+.right-side {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.input {
+  border: 1px solid lightgrey;
+  background-color: #ffffff;
+}
+.input {
+  display: flex;
+  align-items: center;
+}
+.input img:first-of-type {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+}
+.input img:last-of-type {
+  width: 15px;
+  height: 15px;
+  margin: 0 10px;
+}
+.input:not(:first-of-type) {
+  border-top: none;
+}
+input {
+  outline: none;
+  padding: 20px 0;
+  border: none;
+  width: 80%;
+}
+input::placeholder {
+  font-size: 15px;
+}
+#login {
+  margin: 20px 0 40px 0;
+  padding: 12px;
+  border: none;
+  border-radius: 15px;
+  background-color: #fdb4a0;
+  text-align: center;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+  box-shadow: 2px 3px 3px #f2a58f;
+}
+#login:hover {
+  background-color: #f69a8e;
+}
+.join {
+  margin-bottom: 15px;
+  text-align: center;
+}
+.join a {
+  color: #000000;
+}
+/* join.html */
+.join-container {
+  margin: auto;
+  padding: 10% 10%;
+  background-color: #ffffff;
+  height: 100vh;
+  box-shadow: 0px 10px 10px 10px #b3c168;
+}
+.join-input-container {
+  width: 100%;
+  margin: 80px 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+}
+.join-input > div:first-of-type {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.join-input > div:last-of-type {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+#join {
+  padding: 12px;
+  border: none;
+  border-radius: 15px;
+  background-color: #fdb4a0;
+  text-align: center;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 800;
+  box-shadow: 2px 3px 3px #f2a58f;
+}
+#join:hover {
+  background-color: #f69a8e;
+}
